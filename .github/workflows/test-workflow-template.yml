@@ -1,0 +1,8 @@
+name: My Workflow
+on:
+  push:
+    branches:
+      - main
+
+extends:
+  template: .github/workflow-templates/octo-organization-ci.yml
