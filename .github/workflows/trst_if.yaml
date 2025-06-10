@@ -30,16 +30,16 @@ jobs:
         shell: bash
     steps:
     - name: Build all images
-      if: ${{ inputs.services == 'all' }}
+      if: ${{ inputs.services }}
       run: |
         echo $inputs.services
 
     - name: Build specific image (not studio client)
       if: ${{ inputs.services != 'all' && inputs.services != 'studio-client' }}
       run: |
-        echo $inputs.services
+        echo ${{ inputs.services }}
     - name: Build and push studio-client (incl. tooling image)
       if: ${{ inputs.services == 'all' || inputs.services == 'studio-client' }}
       run: |
-        echo $inputs.services
+        echo ${{ inputs.services }}
 
