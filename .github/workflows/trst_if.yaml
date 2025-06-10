@@ -28,7 +28,7 @@ jobs:
     defaults:
       run:
         shell: bash
-
+    steps:
     - name: Build all images
       if: ${{ inputs.services == 'all' }}
       run: |
