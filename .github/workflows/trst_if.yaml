@@ -1,0 +1,45 @@
+name: Blueprint CD publish images
+
+on:
+  workflow_dispatch:
+    inputs:
+      services:
+        description: 'Select the services to build'
+        required: true
+        type: choice
+        default: 'all'
+        options:
+          - all
+          - cae-feeder-app
+          - cae-live-app
+          - cae-preview-app
+          - content-feeder-app
+          - content-server-app
+          - headless-server-app
+          - solr.blueprint-container-image
+          - spring-boot-admin
+          - studio-client
+          - studio-server-app
+          - user-changes-app
+          - workflow-server-app          
+jobs:
+  maven:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    - name: Build all images
+      if: ${{ inputs.services == 'all' }}
+      run: |
+        echo $inputs.services
+
+    - name: Build specific image (not studio client)
+      if: ${{ inputs.services != 'all' && inputs.services != 'studio-client' }}
+      run: |
+        echo $inputs.services
+    - name: Build and push studio-client (incl. tooling image)
+      if: ${{ inputs.services == 'all' || inputs.services == 'studio-client' }}
+      run: |
+        echo $inputs.services
+
